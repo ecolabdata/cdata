@@ -14,7 +14,7 @@ interface StableQueryParamsOptions {
 
 /**
  * Creates a stable ref for query params that only updates when content actually changes.
- * Applies hiddenFilters first, then user filters (which can override hiddenFilters).
+ * Applies hiddenFilters first, then merges user filters (colliding keys are combined into arrays).
  */
 export function useStableQueryParams(options: StableQueryParamsOptions) {
   const { typeConfig, allFilters, q, sort, page, pageSize } = options
@@ -40,12 +40,14 @@ export function useStableQueryParams(options: StableQueryParamsOptions) {
 
     // 3. Apply user filter values (only enabled ones)
     // Skip undefined/null/empty values so they're not sent to the API
+    // If a key was already set by hiddenFilters, merge values (additive) rather than override
     for (const filterName of enabledFilters) {
       const filterRef = allFilters[filterName as string]
       if (filterRef) {
         const value = filterRef.value
         if (value !== undefined && value !== '' && value !== null) {
-          params[filterName as string] = value
+          const key = filterName as string
+          params[key] = key in params ? Array.of(params[key], value).flat() : value
         }
       }
     }
