@@ -24,7 +24,7 @@ import type { Weight, WellType } from './types/ui'
 import type { User, UserReference } from './types/users'
 import type { Report, ReportSubject, ReportReason } from './types/reports'
 import type { GlobalSearchConfig, SearchType, SortOption, TagFilterConfig, TagFilterValue, HiddenFilter, DatasetSearchFilters, DataserviceSearchFilters, ReuseSearchFilters, OrganizationSearchFilters, TopicSearchFilters } from './types/search'
-import { getDefaultDatasetConfig, getDefaultDataserviceConfig, getDefaultReuseConfig, getDefaultOrganizationConfig, getDefaultTopicConfig, getDefaultGlobalSearchConfig, defaultDatasetSortOptions, defaultDataserviceSortOptions, defaultReuseSortOptions, defaultOrganizationSortOptions } from './types/search'
+import { SearchFilterAliases, getDefaultDatasetConfig, getDefaultDataserviceConfig, getDefaultReuseConfig, getDefaultOrganizationConfig, getDefaultTopicConfig, getDefaultGlobalSearchConfig, defaultDatasetSortOptions, defaultDataserviceSortOptions, defaultReuseSortOptions, defaultOrganizationSortOptions } from './types/search'
 
 import ActivityList from './components/ActivityList/ActivityList.vue'
 import UserActivityList from './components/ActivityList/UserActivityList.vue'
@@ -227,6 +227,7 @@ export type {
 }
 
 export {
+  SearchFilterAliases,
   getDefaultDatasetConfig,
   getDefaultDataserviceConfig,
   getDefaultReuseConfig,

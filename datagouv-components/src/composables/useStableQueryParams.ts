@@ -1,5 +1,5 @@
 import { ref, watch, type Ref } from 'vue'
-import type { SearchTypeConfig } from '../types/search'
+import { SearchFilterAliases, type SearchTypeConfig } from '../types/search'
 
 type FilterRefs = Record<string, Ref<unknown>>
 
@@ -46,7 +46,8 @@ export function useStableQueryParams(options: StableQueryParamsOptions) {
       if (filterRef) {
         const value = filterRef.value
         if (value !== undefined && value !== '' && value !== null) {
-          params[filterName as string] = value
+          const paramName = SearchFilterAliases[filterName as string] ?? filterName as string
+          params[paramName] = value
         }
       }
     }
